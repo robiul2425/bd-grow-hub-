@@ -9,23 +9,21 @@ const { Telegraf, Markup } = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const ADMIN_ID = '7508689903'; 
-const LOGO = 'https://i.postimg.cc/YCVW4PDz/npguaps-J-400x400.jpg';
 
 // --- ইউজার মেনু ---
 bot.start((ctx) => {
-    ctx.replyWithPhoto(LOGO, {
-        caption: `✨ ❖𝐁𝐃 𝐆𝐫𝐨𝐰 𝐇𝐮𝐛 ❖ ✨\n\nস্বাগতম! আপনার পয়েন্ট চেক করুন এবং প্রতিদিন ইনকাম করুন। 💎\n\n🚀 প্রিমিয়াম টাক্স A\n🚀 প্রিমিয়াম টাক্স B`,
-        ...Markup.inlineKeyboard([
+    ctx.reply(`✨ ❖𝐁𝐃 𝐆𝐫𝐨𝐰 𝐇𝐮𝐛 ❖ ✨\n\nস্বাগতম! আপনার পয়েন্ট চেক করুন এবং প্রতিদিন ইনকাম করুন। 💎\n\n🚀 প্রিমিয়াম টাক্স A\n🚀 প্রিমিয়াম টাক্স B`,
+        Markup.inlineKeyboard([
             [Markup.button.callback('🚀 প্রিমিয়াম টাক্স A', 'task_a'), Markup.button.callback('🚀 প্রিমিয়াম টাক্স B', 'task_b')],
             [Markup.button.callback('📺 অ্যাড দেখুন (১) 💎', 'watch_ad1'), Markup.button.callback('📺 অ্যাড দেখুন (২) 💎', 'watch_ad2')],
             [Markup.button.callback('💰 ব্যালেন্স ও উইথড্রো', 'withdraw_menu')]
         ])
-    });
+    );
 });
 
 // --- উইথড্রো ও পেমেন্ট লজিক ---
 bot.action('withdraw_menu', (ctx) => {
-    ctx.editMessageCaption('⏳ লোডিং হচ্ছে... ✨✨✨\n\n💸 পেমেন্ট মেথড সিলেক্ট করুন:', Markup.inlineKeyboard([
+    ctx.editMessageText('⏳ লোডিং হচ্ছে... ✨✨✨\n\n💸 পেমেন্ট মেথড সিলেক্ট করুন:', Markup.inlineKeyboard([
         [Markup.button.callback('💠 বাইন্যান্স (০.১০)', 'pay_binance')],
         [Markup.button.callback('💠 বিকাশ (১০)', 'pay_bkash')],
         [Markup.button.callback('💠 নগদ (১০)', 'pay_nagad')],
