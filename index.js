@@ -1,7 +1,14 @@
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => res.send('Bot is running!'));
+app.listen(port, () => console.log(`Bot listening on port ${port}!`));
+
 const { Telegraf, Markup } = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const ADMIN_ID = '7508689903'; // আপনার এডমিন আইডি
+const ADMIN_ID = '7508689903'; 
 const LOGO = 'https://i.postimg.cc/YCVW4PDz/npguaps-J-400x400.jpg';
 
 // --- ইউজার মেনু ---
@@ -40,7 +47,7 @@ bot.action(/pay_(.+)/, (ctx) => {
     ]));
 });
 
-// --- এডমিন প্যানেল লজিক (যা অটোমেটিক কাজ করবে) ---
+// --- এডমিন প্যানেল লজিক ---
 bot.action(/admin_(.+)_(.+)/, (ctx) => {
     if (ctx.from.id.toString() !== ADMIN_ID) return ctx.answerCbQuery('আপনি এডমিন নন!');
     
@@ -50,7 +57,6 @@ bot.action(/admin_(.+)_(.+)/, (ctx) => {
     
     ctx.editMessageText(`${icon} স্ট্যাটাস আপডেট: ${status.toUpperCase()}\n👤 ইউজার ID: ${userId}`);
     
-    // ইউজারকে রেজাল্ট জানানো
     bot.telegram.sendMessage(userId, `${icon} আপনার উইথড্রো রিকোয়েস্টটি ${status.toUpperCase()} হয়েছে!`);
 });
 
